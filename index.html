@@ -1,0 +1,186 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>To do</title>
+
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="page-header"><h1>TODO list</h1></div>
+
+			<div class="buttons text-right">
+				<button type="button" class="btn btn-primary btn-lg m-b-30" data-toggle="modal" data-target="#modalAddTask">Add new Task</button>
+				<button type="button" class="btn btn-danger btn-lg m-b-30" id="clearLocale" >Remove All</button>
+			</div>
+
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="active">
+					<a href="#todo" data-toggle="tab">To do</a></li>
+					<li><a href="#inprogress" data-toggle="tab">In progress</a></li>
+					<li><a href="#done" data-toggle="tab">Done</a></li>
+				</ul>
+				<!-- Контент для табов -->
+				<div class="tab-content" id="taskList">
+					<div role="tabpanel" class="tab-pane active" id="todo">
+						<ul class="list-group" data-status="1"></ul>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="inprogress" >
+						<ul class="list-group" data-status="2"></ul>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="done">
+						<ul class="list-group" data-status="3"></ul>
+					</div>
+				</div>
+				<!-- End Контент -->
+
+				<!-- Counts -->
+				<!-- Red -->
+				<div class="row col-md-12">  
+					<div class="panel panel-danger">
+						<div class="panel-heading">Shoud be done</div>
+						<div class="panel-body">
+							<!-- Counter 1 -->
+							<ul class="list-group">
+								Task count <span class="badge one">0</span>
+							</ul>
+							<!--End  Counter 1 -->
+						</div>
+					</div>
+					<!-- Yellow -->
+					<div class="panel panel-warning">
+						<div class="panel-heading">Will be done soon</div>
+						<div class="panel-body">
+							<!-- Counter 2 -->
+							<ul class="list-group">
+								Task count
+								<span class="badge two">0</span>
+							</ul>
+							<!--End  Counter 2 -->
+						</div>
+
+						<!-- Green -->
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-heading">Alredy done</div>
+						<div class="panel-body">
+							<!-- Counter 3 -->
+							<ul class="list-group">
+								Task count
+								<span class="badge tree">0</span>
+							</ul>
+							<!--End  Counter 3 -->
+
+						</div>
+					</div>
+				</div>
+				<!-- End Counts -->
+
+				<!-- Modal -->
+				<div class="modal fade" id="modalAddTask" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Add task</h4>
+							</div>
+
+							<div class="modal-body">
+								<form id="formAddTask">
+									<div class="form-group">
+										<input type="text" name="title" placeholder="Title" class="form-control">
+									</div>
+								</form>
+								<div class="form-group">
+									<select name="status" class="form-control">
+										<option value="1">To do</option>
+										<option value="2">In progress</option>
+										<option value="3">Done</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="modal-footer">
+								<button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+								<button class="btn btn-success" form="formAddTask">Ok</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Modal -->
+			<!-- Modal -->
+			<div class="modal fade" id="modalEditTask" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Edit task</h4>
+						</div>
+						<!-- Выбор куда добавлять задачу -->
+						<div class="modal-body">
+							<form id="formEditTask">
+								<input type="hidden" name="key">
+								<div class="form-group">
+									<input type="text" name="title" placeholder="Title" class="form-control">
+								</div>
+								<div class="form-group">
+									<select name="status" class="form-control">
+										<option value="" disabled selected>--Select status</option>
+										<option value="1">To do</option>
+										<option value="2">In progress</option>
+										<option value="3">Done</option>
+									</select>
+								</div>
+							</form>
+						</div>
+
+						<div class="modal-footer">
+							<button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+							<button class="btn btn-success" form="formEditTask">Ok</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal -->
+		<!-- Modal -->
+
+		<!-- При удалении задачи спрашивает, уверен ли я -->
+		<div class="modal fade" id="modalDeleteTask" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Delete task</h4>
+					</div>
+
+					<div class="modal-body">
+						Are you shure?
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+						<button class="btn btn-success" form="formEditTask" id="deleteTaskBtn">Ok</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Modal -->
+
+
+	<script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>

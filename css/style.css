@@ -1,0 +1,27 @@
+
+
+.tab-content {
+	    padding-top: 15px;
+}
+
+.edit-task{
+	margin-right: 15px;
+}
+
+// .row {
+
+// 	// margin-right: -15px;
+//  //    margin-left: 210px;
+//  //    display: -webkit-inline-box;
+// }
+.row{
+ display: flex;
+ justify-content: space-between;
+ width: 33%
+}
+
+.panel{
+ width: 30%;
+ margin: 5px;
+ display: inline-block;
+}
